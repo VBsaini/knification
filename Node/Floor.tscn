@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c3dy6r8uhaq1o"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hlop7"]
+distance = -56.0
+
+[node name="Floor" type="Node2D" unique_id=393382121]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1245185473]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2017332204]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1616246973]
+shape = SubResource("WorldBoundaryShape2D_hlop7")

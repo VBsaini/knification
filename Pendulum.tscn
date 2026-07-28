@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bsda6qadphwuv"]
+
+[ext_resource type="Script" uid="uid://ctfcyinlfpkvy" path="res://Pendulum.gd" id="1_wtcfe"]
+
+[node name="Pendulum" type="Node2D" unique_id=1440156762]
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1375050740]
+script = ExtResource("1_wtcfe")

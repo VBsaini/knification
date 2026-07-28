@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drtyp6lg6jqc7"]
+
+[ext_resource type="Script" uid="uid://cvv5kuypnbuia" path="res://Scripts/grapple_gun.gd" id="1_i7pu0"]
+
+[node name="GrappleGun" type="Node2D" unique_id=333260453]
+script = ExtResource("1_i7pu0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=286422044]
+offset_right = 24.0
+offset_bottom = 3.0

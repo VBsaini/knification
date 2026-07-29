@@ -12,6 +12,7 @@ var angle
 var angular_velocity := 0.0
 var angular_acceleration := 0.0
 
+
 func set_start_position(startPos:Vector2, endPos:Vector2):
 	pivot_point = startPos
 	end_position = endPos

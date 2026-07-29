@@ -9,4 +9,3 @@
 position = Vector2(238, 104)
 
 [node name="Character" parent="." unique_id=759451273 instance=ExtResource("2_qm7pp")]
-position = Vector2(218, 59)

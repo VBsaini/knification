@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	rope.set_point_position(0, $GrappleAnchor.global_position * rope.global_transform)
 	rope.set_point_position(1, player_anchor.global_position * rope.global_transform)
 	#rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
@@ -56,15 +56,16 @@ func _process(delta: float) -> void:
 var player_original_parent: Node = null
 
 func attach_player(player: Node2D) -> int:
-	if self.global_position.distance_to(player.global_position) > max_radius or player_original_parent != null:
+	if get_global_mouse_position().distance_to(player.global_position) > max_radius or player_original_parent != null:
 		return -1;
+	$GrappleAnchor.position = to_local(get_global_mouse_position())
 	player_original_parent = player.get_parent()
 	player_anchor.position = player.global_position
 	player.reparent(player_anchor)
 	player.position = Vector2.ZERO
 	
-	rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
-	rope.points[1] = player_anchor.global_position * rope.global_transform
+	#rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
+	#rope.points[1] = player_anchor.global_position * rope.global_transform
 	
 	rope.visible = true
 	player_anchor.visible = true

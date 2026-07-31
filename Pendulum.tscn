@@ -2,7 +2,42 @@
 
 [ext_resource type="Script" uid="uid://ctfcyinlfpkvy" path="res://Pendulum.gd" id="1_wtcfe"]
 
-[node name="Pendulum" type="Node2D" unique_id=1440156762]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k3vi"]
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1375050740]
+[sub_resource type="CircleShape2D" id="CircleShape2D_hlop7"]
+
+[node name="Pendulum" type="Node2D" unique_id=1440156762 node_paths=PackedStringArray("grapple_anchor", "player_anchor", "rope")]
 script = ExtResource("1_wtcfe")
+grapple_anchor = NodePath("GrappleAnchor")
+player_anchor = NodePath("PlayerAnchor")
+rope = NodePath("Rope")
+
+[node name="GrappleAnchor" type="StaticBody2D" parent="." unique_id=1040596944]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleAnchor" unique_id=740869011]
+shape = SubResource("RectangleShape2D_5k3vi")
+
+[node name="Polygon2D" type="Polygon2D" parent="GrappleAnchor" unique_id=579644835]
+polygon = PackedVector2Array(6.974491, -0.7295561, -0.77532196, -6.526659, -7.9149113, -0.85160017, -0.41255188, 6.7013617, 2.2900543, 2.7014952)
+uv = PackedVector2Array(1.5999756, -3.5996933, 1.5999756, -2.7996902, -21.600037, -3.5996933, -23.200043, 17.200302, -3.0517578e-05, 22.800308)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=142906648]
+node_a = NodePath("../GrappleAnchor")
+node_b = NodePath("../PlayerAnchor")
+
+[node name="Rope" type="Line2D" parent="." unique_id=1966721922]
+position = Vector2(52, 52)
+points = PackedVector2Array(0, 0, -136, 101)
+width = 4.0
+
+[node name="PlayerAnchor" type="RigidBody2D" parent="." unique_id=948435847]
+position = Vector2(-102.8, 100.26)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnchor" unique_id=1197217665]
+shape = SubResource("CircleShape2D_hlop7")
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayerAnchor/CollisionShape2D" unique_id=1071699006]
+position = Vector2(-11, -100)
+polygon = PackedVector2Array(8, 96.00001, 8, 104.00001, 16.000008, 104.00001, 16.000008, 96.00001)

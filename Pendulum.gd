@@ -1,53 +1,82 @@
 extends Node2D
+
+
+
+
+
 class_name Pendulum
 
-var pivot_point:Vector2
-@export var end_position:Vector2
-var arm_length:float
-var angle
-
-@export var gravity:float = 0.4 + 60 
-@export var damping:float = 0.995 
-
-var angular_velocity := 0.0
-var angular_acceleration := 0.0
+@export var grapple_anchor: StaticBody2D
+@export var player_anchor: RigidBody2D
+@export var rope: Line2D
 
 
-func set_start_position(startPos:Vector2, endPos:Vector2):
-	pivot_point = startPos
-	end_position = endPos
-	arm_length = Vector2.ZERO.distance_to(end_position-pivot_point)
-	angle = Vector2.ZERO.angle_to(end_position-pivot_point) - deg_to_rad(-90)
-	angular_acceleration = 0.0
-	angular_velocity = 0.0
-
-#funatart_position(global_position, end_position)
-
-func process_velocity(delta:float)->void:
-	angular_acceleration = ((-gravity*delta) / arm_length) * sin(angle)
-	angular_velocity += angular_acceleration
-	angular_velocity *= damping
-	angle += angular_velocity
 
 
-func add_angular_velocity(force:float)->void:
-	angular_velocity += force
 
-func _physics_process(delta: float) -> void:
-	game_input()
-	end_position = pivot_point + Vector2(arm_length*sin(angle), arm_length*cos(angle))
-	process_velocity(delta)
+@export var max_radius:float = 512
+
+
+
+func _ready() -> void:
+	add_to_group("grappling-hook-system")
+	rope.visible = true
+	player_anchor.visible = true
+	
+
+
+
+
+func _process(delta: float) -> void:
+	rope.set_point_position(0, $GrappleAnchor.global_position * rope.global_transform)
+	rope.set_point_position(1, player_anchor.global_position * rope.global_transform)
+	#rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
+	#rope.points[1] = player_anchor.global_position * rope.global_transform
+	
+	for child in player_anchor.get_children():
+		if "position" in child:
+			child.position = Vector2(0,0)
+	
+	if Input.is_action_pressed("right"):
+		if player_anchor.linear_velocity.length() < 200:
+			player_anchor.apply_central_impulse(
+				player_anchor.global_transform.x * 32
+			)
+	elif Input.is_action_pressed("left"):
+		if player_anchor.linear_velocity.length() < 200:
+			player_anchor.apply_central_impulse(
+				player_anchor.global_transform.x * -32
+			)
+	
+	
 	queue_redraw()
 	
 
-func game_input() -> void:
-	var dir:float = 0.0
-	if Input.is_action_just_pressed("right"):
-		dir += 1
-	if Input.is_action_just_pressed("left"):
-		dir -= 1
-	add_angular_velocity(dir * 0.02)
 
-func _draw() -> void:
-	draw_line(Vector2.ZERO, end_position - pivot_point, Color.SADDLE_BROWN, 1.0, false)
-	draw_circle(end_position-pivot_point, 3, Color.RED)
+var player_original_parent: Node = null
+
+func attach_player(player: Node2D) -> int:
+	if self.global_position.distance_to(player.global_position) > max_radius or player_original_parent != null:
+		return -1;
+	player_original_parent = player.get_parent()
+	player_anchor.position = player.global_position
+	player.reparent(player_anchor)
+	player.position = Vector2.ZERO
+	
+	rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
+	rope.points[1] = player_anchor.global_position * rope.global_transform
+	
+	rope.visible = true
+	player_anchor.visible = true
+	
+	return 0
+
+func detach_player(player: Node2D) -> int:
+	if player_original_parent == null:
+		return -1
+	player.reparent(player_original_parent)
+	player.velocity = player_anchor.linear_velocity
+	player_original_parent = null
+	rope.visible = false
+	player_anchor.visible = false
+	return 0

@@ -15,7 +15,7 @@ distance = 10.0
 position = Vector2(51, -4)
 
 [node name="Pendulum" parent="." unique_id=1440156762 instance=ExtResource("3_3gthw")]
-position = Vector2(293, -93)
+position = Vector2(171, -92)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1337513992]
 

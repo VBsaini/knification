@@ -22,10 +22,9 @@ polygon = PackedVector2Array(6.974491, -0.7295561, -0.77532196, -6.526659, -7.91
 uv = PackedVector2Array(1.5999756, -3.5996933, 1.5999756, -2.7996902, -21.600037, -3.5996933, -23.200043, 17.200302, -3.0517578e-05, 22.800308)
 
 [node name="Rope" type="Line2D" parent="." unique_id=1966721922]
-position = Vector2(0.2942505, -0.5091858)
-points = PackedVector2Array(0, 0, 0, 0)
+position = Vector2(52, 52)
+points = PackedVector2Array(0, 0, -136, 101)
 width = 4.0
-default_color = Color(1, 0.5764706, 1, 1)
 
 [node name="PlayerAnchor" type="RigidBody2D" parent="." unique_id=948435847]
 collision_layer = 0
@@ -38,8 +37,8 @@ shape = SubResource("CircleShape2D_hlop7")
 position = Vector2(-11, -100)
 polygon = PackedVector2Array(8, 96.00001, 8, 104.00001, 16.000008, 104.00001, 16.000008, 96.00001)
 
-[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=159997067]
-light_mask = 0
-visibility_layer = 0
+[node name="Joint" type="GrooveJoint2D" parent="." unique_id=762980891]
 node_a = NodePath("../GrappleAnchor")
 node_b = NodePath("../PlayerAnchor")
+length = 1.0
+initial_offset = 1.0

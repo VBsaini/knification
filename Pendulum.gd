@@ -40,12 +40,12 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		if player_anchor.linear_velocity.length() < 200:
 			player_anchor.apply_central_impulse(
-				player_anchor.global_transform.x * 32
+				player_anchor.global_transform.x * -32
 			)
 	elif Input.is_action_pressed("left"):
 		if player_anchor.linear_velocity.length() < 200:
 			player_anchor.apply_central_impulse(
-				player_anchor.global_transform.x * -32
+				player_anchor.global_transform.x * 32
 			)
 	
 	
@@ -63,9 +63,17 @@ func attach_player(player: Node2D) -> int:
 	player_anchor.position = player.global_position
 	player.reparent(player_anchor)
 	player.position = Vector2.ZERO
+	var launch_dist = player_anchor.position.distance_to($GrappleAnchor.position)
+	print(launch_dist)
+	var parent = $PinJoint2D.get_parent()
+	parent.remove_child($PinJoint2D)
+	var joint = PinJoint2D.new()
+	joint.set_name("PinJoint2D")
+	joint.position = grapple_anchor.position
+	joint.node_a = grapple_anchor.get_path()
+	joint.node_b = player_anchor.get_path()
+	parent.add_child(joint)
 	
-	#rope.points[0] = $GrappleAnchor.global_position * rope.global_transform
-	#rope.points[1] = player_anchor.global_position * rope.global_transform
 	
 	rope.visible = true
 	player_anchor.visible = true
@@ -81,3 +89,4 @@ func detach_player(player: Node2D) -> int:
 	rope.visible = false
 	player_anchor.visible = false
 	return 0
+	

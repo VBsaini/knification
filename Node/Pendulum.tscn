@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bsda6qadphwuv"]
 
-[ext_resource type="Script" uid="uid://ctfcyinlfpkvy" path="res://Pendulum.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://ctfcyinlfpkvy" path="res://Scripts/Pendulum.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://c27783kb8ok8t" path="res://player_anchor.gd" id="2_ywpvm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k3vi"]
 
@@ -30,6 +31,7 @@ default_color = Color(1, 0.5764706, 1, 1)
 [node name="PlayerAnchor" type="RigidBody2D" parent="." unique_id=948435847]
 collision_layer = 0
 collision_mask = 0
+script = ExtResource("2_ywpvm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnchor" unique_id=1197217665]
 shape = SubResource("CircleShape2D_hlop7")

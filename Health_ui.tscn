@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://w6d4x72n2n8j"]
+
+[ext_resource type="Script" uid="uid://k4yah6dmf2tt" path="res://Health_ui.gd" id="1_0fbet"]
+
+[node name="Health_ui" type="Control" unique_id=1332169633]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("1_0fbet")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=755546524]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -30.0
+offset_right = 53.0
+offset_bottom = -9.0
+grow_vertical = 0

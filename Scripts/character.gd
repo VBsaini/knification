@@ -7,7 +7,13 @@ extends CharacterBody2D
 @export var ACCELERATION = 1500.0;
 @export var FRICTION = 2000.0;
 
-enum State {IDLE, WALKING, JUMPING, KNIFE, GRAPPLING}
+@export var dash_speed:float = 600.0
+@export var dash_duration:float = 0.15
+
+var last_facing_direction := Vector2.RIGHT
+var can_dash := false
+
+enum State {IDLE, WALKING, JUMPING, KNIFE, GRAPPLING, DASHING}
 var currentState = State.IDLE
 
 
@@ -27,29 +33,43 @@ func _physics_process(delta: float) -> void:
 			currentState = State.JUMPING
 		velocity.y = JUMP_VELOCITY
 
-	var direction := Input.get_axis("right", "left")
 	if currentState != State.GRAPPLING:
-		if direction:
-			if currentState != State.KNIFE:
-				currentState = State.WALKING
-			if direction != 0:
-				$AnimatedSprite2D.flip_h = (direction < 0)
-				velocity.x = move_toward(velocity.x, direction*SPEED, ACCELERATION*delta)
-		else:
-			if currentState != State.KNIFE:
-				currentState = State.IDLE
-			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+		walking(delta)
 
 
 	if Input.is_action_just_pressed("knife"):
 		currentState = State.KNIFE
+
 	if Input.is_action_just_pressed("grapple"):
-		#global_rotation = 0
 		currentState = State.GRAPPLING
+	
+	if Input.is_action_just_released("grapple"):
+		currentState = State.IDLE
+	
+	if Input.is_action_just_pressed("dash"):
+		velocity = dash_speed * last_facing_direction
+	
 	Handle_State(currentState)
 	global_rotation = 0
 	move_and_slide()
 
+
+func walking(delta:float):
+	var direction := Input.get_axis("right", "left")
+	if direction:
+		if currentState != State.KNIFE:
+			currentState = State.WALKING
+		if direction < 0:
+			last_facing_direction = Vector2.LEFT
+		else:
+			last_facing_direction = Vector2.RIGHT
+		$AnimatedSprite2D.flip_h = (direction < 0)
+		velocity.x = lerp(velocity.x, direction*SPEED, 0.4)
+		#velocity.x = move_toward(velocity.x, direction*SPEED, ACCELERATION*delta)
+	else:
+		if currentState != State.KNIFE:
+			currentState = State.IDLE
+		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 
 func Handle_State(current_state: State):
 	match current_state:

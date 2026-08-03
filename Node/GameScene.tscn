@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dqym2eeduqhet"]
 
 [ext_resource type="PackedScene" uid="uid://br1sb10hph8u2" path="res://Node/character.tscn" id="2_qm7pp"]
-[ext_resource type="PackedScene" uid="uid://bsda6qadphwuv" path="res://Pendulum.tscn" id="3_3gthw"]
+[ext_resource type="PackedScene" uid="uid://bsda6qadphwuv" path="res://Node/Pendulum.tscn" id="3_3gthw"]
+[ext_resource type="PackedScene" uid="uid://w6d4x72n2n8j" path="res://Health_ui.tscn" id="3_f7fkf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlop7"]
 size = Vector2(874, 20)
@@ -12,15 +13,11 @@ distance = 10.0
 [node name="GameScene" type="Node2D" unique_id=1260699251]
 
 [node name="Character" parent="." unique_id=759451273 instance=ExtResource("2_qm7pp")]
-position = Vector2(51, -4)
-
-[node name="Pendulum" parent="." unique_id=1440156762 instance=ExtResource("3_3gthw")]
-position = Vector2(171, -92)
+position = Vector2(71, -77)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1337513992]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=981102468]
-position = Vector2(80, 131)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=771475369]
 position = Vector2(102, -2)
@@ -34,3 +31,10 @@ offset_bottom = 13.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=526361607]
 shape = SubResource("WorldBoundaryShape2D_hlop7")
+
+[node name="Pendulum" parent="." unique_id=1440156762 instance=ExtResource("3_3gthw")]
+position = Vector2(286, -122)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1571770922]
+
+[node name="Health_ui" parent="CanvasLayer" unique_id=1332169633 instance=ExtResource("3_f7fkf")]

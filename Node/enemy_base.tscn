@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://cpbsxi8h53ipm"]
+
+[ext_resource type="Script" uid="uid://df2vpndjr7ngu" path="res://Node/enemy_base.gd" id="1_ewvdc"]
+[ext_resource type="Texture2D" uid="uid://j80836vfwhei" path="res://assets/FREE_Adventurer 2D Pixel Art/Sprites/IDLE/idle_left.png" id="1_h6m8j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewvdc"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufw8u"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f1li"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7o5k"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7nhm"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_567ad"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deaiq"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt5gq"]
+atlas = ExtResource("1_h6m8j")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hlop7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewvdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufw8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f1li")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7o5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7nhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_567ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_deaiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt5gq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ug600"]
+height = 38.0
+
+[node name="Enemy_base" type="CharacterBody2D" unique_id=1426437746]
+script = ExtResource("1_ewvdc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=451912147]
+sprite_frames = SubResource("SpriteFrames_hlop7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709122119]
+shape = SubResource("CapsuleShape2D_ug600")

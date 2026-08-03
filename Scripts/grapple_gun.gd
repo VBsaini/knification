@@ -14,13 +14,11 @@ func _process(_delta: float) -> void:
 		for grappling_hook_system in get_tree().get_nodes_in_group("grappling-hook-system"):
 			var success = grappling_hook_system.attach_player(self.get_parent())
 			if success == 0:
-				print("attached")
 				break
 	elif Input.is_action_just_released("grapple"):
 		for grappling_hook_system in get_tree().get_nodes_in_group("grappling-hook-system"):
 			var success = grappling_hook_system.detach_player(self.get_parent())
 			if success == 0:
-				print("deattached")
 				break
 	pass
 

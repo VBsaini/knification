@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpbsxi8h53ipm"]
 
-[ext_resource type="Script" uid="uid://df2vpndjr7ngu" path="res://Node/enemy_base.gd" id="1_ewvdc"]
+[ext_resource type="Script" uid="uid://df2vpndjr7ngu" path="res://Scripts/enemy_base.gd" id="1_ewvdc"]
 [ext_resource type="Texture2D" uid="uid://j80836vfwhei" path="res://assets/FREE_Adventurer 2D Pixel Art/Sprites/IDLE/idle_left.png" id="1_h6m8j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ewvdc"]
@@ -70,6 +70,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ug600"]
 height = 38.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ug600"]
+radius = 132.01515
+
 [node name="Enemy_base" type="CharacterBody2D" unique_id=1426437746]
 script = ExtResource("1_ewvdc")
 
@@ -78,3 +81,8 @@ sprite_frames = SubResource("SpriteFrames_hlop7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709122119]
 shape = SubResource("CapsuleShape2D_ug600")
+
+[node name="Detection" type="Area2D" parent="." unique_id=1378413608]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=1871697379]
+shape = SubResource("CircleShape2D_ug600")

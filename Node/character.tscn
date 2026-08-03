@@ -273,3 +273,8 @@ shape = SubResource("CapsuleShape2D_hlop7")
 
 [node name="GrappleGun" parent="CharacterBody2D" unique_id=333260453 node_paths=PackedStringArray("player") instance=ExtResource("6_8ds84")]
 player = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=105538151]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_vertical_enabled = true

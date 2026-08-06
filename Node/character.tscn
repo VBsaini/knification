@@ -260,6 +260,8 @@ radius = 7.0
 [node name="Character" type="Node2D" unique_id=759451273]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=754324110]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_g0q5o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=489919337]
@@ -273,8 +275,3 @@ shape = SubResource("CapsuleShape2D_hlop7")
 
 [node name="GrappleGun" parent="CharacterBody2D" unique_id=333260453 node_paths=PackedStringArray("player") instance=ExtResource("6_8ds84")]
 player = NodePath("../..")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=105538151]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-drag_vertical_enabled = true

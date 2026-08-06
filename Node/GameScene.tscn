@@ -40,3 +40,5 @@ position = Vector2(76, -186)
 
 [node name="Enemy_base" parent="." unique_id=1426437746 instance=ExtResource("4_f7fkf")]
 position = Vector2(345, -73)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1565306369]

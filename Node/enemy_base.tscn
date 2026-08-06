@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://df2vpndjr7ngu" path="res://Scripts/enemy_base.gd" id="1_ewvdc"]
 [ext_resource type="Texture2D" uid="uid://j80836vfwhei" path="res://assets/FREE_Adventurer 2D Pixel Art/Sprites/IDLE/idle_left.png" id="1_h6m8j"]
+[ext_resource type="PackedScene" uid="uid://bri32k8cyu7a5" path="res://single_bullet.tscn" id="3_ufw8u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ewvdc"]
 atlas = ExtResource("1_h6m8j")
@@ -83,6 +84,14 @@ sprite_frames = SubResource("SpriteFrames_hlop7")
 shape = SubResource("CapsuleShape2D_ug600")
 
 [node name="Detection" type="Area2D" parent="." unique_id=1378413608]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=1871697379]
 shape = SubResource("CircleShape2D_ug600")
+
+[node name="Single_Bullet" parent="." unique_id=2004739156 instance=ExtResource("3_ufw8u")]
+
+[node name="Timer" type="Timer" parent="." unique_id=902887022]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

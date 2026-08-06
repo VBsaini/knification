@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 
 func _ready() -> void:
 	$Detection.body_entered.connect(player_detected)
+	$Detection.body_exited.connect(player_not_in_sight)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -16,6 +17,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+
 func player_detected(body):
-	print(body.name)
+	$Timer.start()
 	pass
+
+func player_not_in_sight(body):
+	$Timer.stop()
+	pass
+
+
+func _on_timer_timeout() -> void:
+	$Single_Bullet.shoot(Vector2(0, 0))
+	$Timer.start()
+	pass # Replace with function body.

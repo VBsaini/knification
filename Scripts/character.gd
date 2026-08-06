@@ -18,6 +18,7 @@ var currentState = State.IDLE
 
 
 func _ready() -> void:
+	add_to_group("player")
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 
 
